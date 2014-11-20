@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/rlLayout">
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sbRed"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="42dp"
+        android:indeterminate="false"
+        android:max="255"
+        android:layout_alignLeft="@+id/tvRed"
+        android:layout_alignStart="@+id/tvRed"
+        android:layout_alignRight="@+id/tvBlue"
+        android:layout_alignEnd="@+id/tvBlue" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sbGreen"
+        android:layout_below="@+id/sbRed"
+        android:layout_alignLeft="@+id/sbRed"
+        android:layout_alignStart="@+id/sbRed"
+        android:layout_marginTop="32dp"
+        android:max="255"
+        android:indeterminate="false"
+        android:layout_alignRight="@+id/sbRed"
+        android:layout_alignEnd="@+id/sbRed" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sbBlue"
+        android:layout_below="@+id/sbGreen"
+        android:layout_alignLeft="@+id/sbGreen"
+        android:layout_alignStart="@+id/sbGreen"
+        android:layout_marginTop="37dp"
+        android:max="255"
+        android:indeterminate="false"
+        android:layout_alignRight="@+id/sbGreen"
+        android:layout_alignEnd="@+id/sbGreen" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Red"
+        android:id="@+id/tvRed"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Green"
+        android:id="@+id/tvGreen"
+        android:layout_alignTop="@+id/tvRed"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Blue"
+        android:id="@+id/tvBlue"
+        android:layout_alignTop="@+id/tvGreen"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="48dp" />
+
+</RelativeLayout>

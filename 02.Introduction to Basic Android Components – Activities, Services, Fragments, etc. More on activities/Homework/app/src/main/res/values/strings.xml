@@ -2,10 +2,9 @@
 <resources>
 
     <string name="app_name">Homework - Meal Calculator</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="contact_us">Contact Us</string>
     <string name="euro">EUR</string>
-    <string name="bulgarianLev">BGN</string>
+    <string name="bulgarian_lev">BGN</string>
     <string name="dollar">USD</string>
     <string name="choose_your_currency">Currency:</string>
     <string name="tv_dish">Dish:</string>
@@ -18,4 +17,10 @@
     <string name="home_deliver">Home Delivery</string>
     <string name="total_price">Total Price:</string>
     <string name="total">0.00 EUR</string>
+    <string name="title_activity_about_us">AboutUs</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Name: TL Nguyen</string>
+    <string name="email">Email: tl.nguyen.1987@gmail.com</string>
+
 </resources>

@@ -1,0 +1,221 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/rgCurrencyGroup"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp">
+        <RadioButton android:id="@+id/rbEur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/euro"/>
+        <RadioButton android:id="@+id/rbBgn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bulgarianLev"/>
+        <RadioButton android:id="@+id/rbUsd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dollar"/>
+    </RadioGroup>
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/choose_your_currency"
+        android:id="@+id/tvChooseCurrency"
+        android:layout_marginTop="32dp"
+        android:layout_alignTop="@+id/rgCurrencyGroup"
+        android:layout_alignLeft="@+id/tvDish"
+        android:layout_alignStart="@+id/tvDish" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tv_dish"
+        android:id="@+id/tvDish"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/rgCurrencyGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="33dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/price"
+        android:id="@+id/tvDishPrice"
+        android:layout_toEndOf="@+id/tvDish"
+        android:layout_marginLeft="26dp"
+        android:layout_alignBottom="@+id/tvDish"
+        android:layout_toRightOf="@+id/tvDish" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/quantity"
+        android:id="@+id/tvDishQuantity"
+        android:layout_toStartOf="@+id/rgCurrencyGroup"
+        android:layout_toLeftOf="@+id/rgCurrencyGroup"
+        android:layout_alignTop="@+id/tvDishPrice"
+        android:layout_toRightOf="@+id/tvChooseCurrency"
+        android:layout_toEndOf="@+id/tvChooseCurrency"
+        android:gravity="right"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plus"
+        android:id="@+id/btnDishQuantityPlus"
+        android:layout_below="@+id/rgCurrencyGroup"
+        android:layout_toRightOf="@+id/tvDishQuantity"
+        android:layout_toEndOf="@+id/tvDishQuantity" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minus"
+        android:id="@+id/btnDishQuantityMinus"
+        android:layout_below="@+id/btnDishQuantityPlus"
+        android:layout_toRightOf="@+id/tvDishQuantity"
+        android:layout_toEndOf="@+id/tvDishQuantity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tv_desert"
+        android:id="@+id/tvDesert"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/tvDish"
+        android:layout_alignStart="@+id/tvDish" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/price"
+        android:id="@+id/tvDesertPrice"
+        android:layout_toEndOf="@+id/tvDish"
+        android:layout_toRightOf="@+id/tvDish"
+        android:layout_alignBottom="@+id/tvDesert"
+        android:layout_alignLeft="@+id/tvDishPrice"
+        android:layout_alignStart="@+id/tvDishPrice" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/quantity"
+        android:id="@+id/tvDesertQuantity"
+        android:layout_toStartOf="@+id/rgCurrencyGroup"
+        android:layout_toLeftOf="@+id/rgCurrencyGroup"
+        android:layout_toEndOf="@+id/tvChooseCurrency"
+        android:layout_alignTop="@+id/tvDesertPrice"
+        android:layout_toRightOf="@+id/tvChooseCurrency"
+        android:gravity="right"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plus"
+        android:id="@+id/btnDesertQuantityPlus"
+        android:layout_toEndOf="@+id/tvDesertQuantity"
+        android:layout_below="@+id/btnDishQuantityMinus"
+        android:layout_toRightOf="@+id/tvDesertQuantity" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minus"
+        android:id="@+id/btnDesertQuantityMinus"
+        android:layout_below="@+id/btnDesertQuantityPlus"
+        android:layout_toRightOf="@+id/tvDesertQuantity"
+        android:layout_toEndOf="@+id/tvDesertQuantity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tv_drink"
+        android:id="@+id/tvDrink"
+        android:layout_below="@+id/btnDesertQuantityMinus"
+        android:layout_alignLeft="@+id/tvDesert"
+        android:layout_alignStart="@+id/tvDesert"
+        android:layout_marginTop="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/price"
+        android:id="@+id/tvDrinkPrice"
+        android:layout_toEndOf="@+id/tvDish"
+        android:layout_toRightOf="@+id/tvDish"
+        android:layout_alignBottom="@+id/tvDrink"
+        android:layout_alignLeft="@+id/tvDesertPrice"
+        android:layout_alignStart="@+id/tvDesertPrice" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sbDrinkQuantity"
+        android:layout_alignBottom="@+id/tvDrinkPrice"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/tvDrinkPrice"
+        android:layout_toEndOf="@+id/tvDrinkPrice"
+        android:max="3"
+        android:indeterminate="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_deliver"
+        android:id="@+id/cbHomeDelivery"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/tvDrinkPrice"
+        android:layout_centerHorizontal="true"
+        android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/total_price"
+        android:id="@+id/tvTotalLabel"
+        android:layout_toStartOf="@+id/tvDesertQuantity"
+        android:layout_below="@+id/cbHomeDelivery"
+        android:layout_marginTop="24dp"
+        android:layout_toLeftOf="@+id/tvDesertQuantity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/total"
+        android:id="@+id/tvTotal"
+        android:layout_alignBottom="@+id/tvTotalLabel"
+        android:layout_alignRight="@+id/sbDrinkQuantity"
+        android:layout_alignEnd="@+id/sbDrinkQuantity" />
+
+</RelativeLayout>

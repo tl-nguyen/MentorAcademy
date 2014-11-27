@@ -55,7 +55,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             mBtnEdit = (Button) findViewById(R.id.btnEdit);
             mBtnAdmin = (Button) findViewById(R.id.btnAdmin);
 
-            User currentUser = DummyDbManager.getInstance().getCurrentUser();
             mEtUsername.setText(currentUser.getUsername());
             mEtPassword.setText(currentUser.getPassword());
             mEtEmail.setText(currentUser.getEmail());

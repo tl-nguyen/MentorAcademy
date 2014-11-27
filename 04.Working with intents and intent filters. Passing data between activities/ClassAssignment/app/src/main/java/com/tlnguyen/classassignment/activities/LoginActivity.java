@@ -29,6 +29,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        init();
+    }
+
+    private void init() {
         mEtUsername = (EditText) findViewById(R.id.etUsername);
         mEtPassword = (EditText) findViewById(R.id.etPassword);
 

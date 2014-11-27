@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.tlnguyen.classassignment.R;
 import com.tlnguyen.classassignment.common.Role;
@@ -25,6 +26,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        init();
+    }
+
+    private void init() {
         mEtUsername = (EditText) findViewById(R.id.etNewUsername);
         mEtPassword = (EditText) findViewById(R.id.etNewPassword);
         mEtEmail = (EditText) findViewById(R.id.etNewEmail);
@@ -58,11 +63,25 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
             newUser.setRole(Role.USER);
         }
 
-        DummyDbManager.getInstance().getUsers().add(newUser);
-        DummyDbManager.getInstance().setCurrentUser(newUser);
+        if (validateUser(newUser)) {
+            DummyDbManager.getInstance().getUsers().add(newUser);
+            DummyDbManager.getInstance().setCurrentUser(newUser);
 
-        Intent toMainIntent = new Intent(this, MainActivity.class);
-        startActivity(toMainIntent);
-        finish();
+            Intent toMainIntent = new Intent(this, MainActivity.class);
+            startActivity(toMainIntent);
+            finish();
+        }
+        else {
+            Toast.makeText(this, getString(R.string.validation_error), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean validateUser(User newUser) {
+        if (newUser.getUsername().equals("")
+                || newUser.getPassword().equals("")) {
+            return false;
+        }
+
+        return true;
     }
 }

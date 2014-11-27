@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.tlnguyen.classassignment.R;
 import com.tlnguyen.classassignment.common.Role;
@@ -67,7 +68,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mBtnEdit.setOnClickListener(this);
         mBtnAdmin.setOnClickListener(this);
 
-        if (currentUser.getRole() == Role.ADMIN) {
+        if (currentUser.getRole() == Role.ADMIN ||
+                currentUser.getRole() == Role.MODERATOR) {
             this.mBtnAdmin.setVisibility(View.VISIBLE);
             this.mEtUserId.setVisibility(View.VISIBLE);
         }
@@ -125,8 +127,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void editCurrentUser() {
-        this.currentUser.setUsername(this.mEtUsername.getText().toString());
-        this.currentUser.setPassword(this.mEtPassword.getText().toString());
-        this.currentUser.setEmail(this.mEtEmail.getText().toString());
+        String userName = this.mEtUsername.getText().toString();
+        String password = this.mEtPassword.getText().toString();
+
+        if (!(userName.equals("") &&
+                password.equals(""))) {
+            this.currentUser.setUsername(userName);
+            this.currentUser.setPassword(password);
+            this.currentUser.setEmail(this.mEtEmail.getText().toString());
+        }
+        else {
+            Toast.makeText(this, getString(R.string.validation_error), Toast.LENGTH_SHORT).show();
+        }
     }
 }

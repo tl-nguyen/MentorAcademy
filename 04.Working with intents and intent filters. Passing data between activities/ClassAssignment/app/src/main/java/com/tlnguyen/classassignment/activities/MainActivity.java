@@ -3,7 +3,6 @@ package com.tlnguyen.classassignment.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,31 +46,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         }
+        else {
+            mEtUsername = (EditText) findViewById(R.id.etMainUsername);
+            mEtPassword = (EditText) findViewById(R.id.etMainPassword);
+            mEtEmail = (EditText) findViewById(R.id.etMainEmail);
+            mEtUserId = (EditText) findViewById(R.id.etUserId);
 
-        Log.i(TAG, currentUser.getUsername() + " " +
-                currentUser.getRole() + " " +
-                currentUser.getId());
+            mBtnEdit = (Button) findViewById(R.id.btnEdit);
+            mBtnAdmin = (Button) findViewById(R.id.btnAdmin);
 
-        mEtUsername = (EditText) findViewById(R.id.etMainUsername);
-        mEtPassword = (EditText) findViewById(R.id.etMainPassword);
-        mEtEmail = (EditText) findViewById(R.id.etMainEmail);
-        mEtUserId = (EditText) findViewById(R.id.etUserId);
+            User currentUser = DummyDbManager.getInstance().getCurrentUser();
+            mEtUsername.setText(currentUser.getUsername());
+            mEtPassword.setText(currentUser.getPassword());
+            mEtEmail.setText(currentUser.getEmail());
 
-        mBtnEdit = (Button) findViewById(R.id.btnEdit);
-        mBtnAdmin = (Button) findViewById(R.id.btnAdmin);
+            mBtnEdit.setOnClickListener(this);
+            mBtnAdmin.setOnClickListener(this);
 
-        User currentUser = DummyDbManager.getInstance().getCurrentUser();
-        mEtUsername.setText(currentUser.getUsername());
-        mEtPassword.setText(currentUser.getPassword());
-        mEtEmail.setText(currentUser.getEmail());
-
-        mBtnEdit.setOnClickListener(this);
-        mBtnAdmin.setOnClickListener(this);
-
-        if (currentUser.getRole() == Role.ADMIN ||
-                currentUser.getRole() == Role.MODERATOR) {
-            this.mBtnAdmin.setVisibility(View.VISIBLE);
-            this.mEtUserId.setVisibility(View.VISIBLE);
+            if (currentUser.getRole() == Role.ADMIN ||
+                    currentUser.getRole() == Role.MODERATOR) {
+                this.mBtnAdmin.setVisibility(View.VISIBLE);
+                this.mEtUserId.setVisibility(View.VISIBLE);
+            }
         }
     }
 

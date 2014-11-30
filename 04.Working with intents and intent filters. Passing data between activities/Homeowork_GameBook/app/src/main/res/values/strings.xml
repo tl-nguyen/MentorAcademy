@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Homeowork _GameBook</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_raiden_first_scene">RaidenFirstScene</string>
+    <string name="statusText">Blood = %1$d, Energy = %2$d</string>
+    <string name="title_activity_raiden_punch">RaidenPunch</string>
+    <string name="title_activity_raiden_kick">RaidenKick</string>
+    <string name="title_activity_raiden_combo">RaidenCombo</string>
+    <string name="title_activity_raiden_thunder">RaidenThunder</string>
+    <string name="title_activity_raiden_teleport">RaidenTeleport</string>
+    <string name="title_activity_raiden_block">RaidenBlock</string>
+    <string name="title_activity_shaokahn_first_scene">ShaokahnFirstScene</string>
+
+</resources>

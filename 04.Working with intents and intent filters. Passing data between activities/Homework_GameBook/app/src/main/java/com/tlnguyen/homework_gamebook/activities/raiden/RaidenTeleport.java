@@ -3,6 +3,7 @@ package com.tlnguyen.homework_gamebook.activities.raiden;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,8 +27,11 @@ public class RaidenTeleport extends Activity implements View.OnClickListener {
 
         Bundle bundle = getIntent().getExtras();
         mainCharacter = bundle.getParcelable(Constants.MAIN_CHARACTER);
+
+        double energyLost = mainCharacter.getEnergy() * 0.2;
+        mainCharacter.setEnergy(mainCharacter.getEnergy() - (int)(energyLost));
+        Log.i(Constants.TAG, String.format("You have lost %d Blood, %d Energy", mainCharacter.getBlood(), energyLost));
         mainCharacter.setBlood(0);
-        mainCharacter.setEnergy(mainCharacter.getEnergy() - (int)(mainCharacter.getEnergy() - mainCharacter.getEnergy() * 0.2));
 
         tvStatus = (TextView) findViewById(R.id.tvStatus);
         btnNewGame = (Button) findViewById(R.id.btnNewGame);

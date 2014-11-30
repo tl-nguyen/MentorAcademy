@@ -5,4 +5,5 @@ package com.tlnguyen.homework_gamebook.common;
  */
 public class Constants {
     public static String MAIN_CHARACTER = "MAIN_CHARACTER";
+    public static String TAG = "MORTALCOMBAT";
 }

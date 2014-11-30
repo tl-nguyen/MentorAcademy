@@ -3,6 +3,7 @@ package com.tlnguyen.homework_gamebook.activities.raiden;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class RaidenBlock extends Activity implements View.OnClickListener{
         tvStatus = (TextView) findViewById(R.id.tvStatus);
         btnCombo = (Button) findViewById(R.id.btnCombo);
         btnThunder = (Button) findViewById(R.id.btnThunder);
+
+        Log.i(Constants.TAG, String.format("You have lost %d Blood, %d Energy", 0, 0));
 
         tvStatus.setText(String.format(getString(R.string.statusText), mainCharacter.getBlood(), mainCharacter.getEnergy()));
         btnCombo.setOnClickListener(this);

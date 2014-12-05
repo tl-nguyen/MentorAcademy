@@ -1,0 +1,28 @@
+#
+# generated on 2014/12/05 04:00:30
+#
+# --table-start--
+dataClass=com.tlnguyen.homework_catalog.models.Book
+tableName=book
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+canBeNull=false
+unique=true
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=isbn
+# --field-end--
+# --field-start--
+fieldName=imageUrl
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

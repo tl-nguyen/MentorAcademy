@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Book Catalog</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="book_name_text">Book Name</string>
+    <string name="add_text">Add</string>
+    <string name="title_activity_add_book">AddBook</string>
+    <string name="image_url">Image Url (Example: http://path.to.the.image)</string>
+    <string name="isbn">ISBN</string>
+    <string name="description">Description</string>
+    <string name="book_title">Book Title</string>
+    <string name="save">Save</string>
+    <string name="title_activity_book_detail">BookDetail</string>
+    <string name="book_cover">Book Cover</string>
+    <string name="delete">Delete</string>
+    <string name="tutorial_text">*Press long click to select for deleting</string>
+
+</resources>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "com.tlnguyen.classdemo"
+        applicationId "com.tlnguyen.classassignment"
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 1

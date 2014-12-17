@@ -16,5 +16,7 @@
     <string name="book_cover">Book Cover</string>
     <string name="delete">Delete</string>
     <string name="tutorial_text">*Press long click to select for deleting</string>
+    <string name="search_hint">Search for book</string>
+    <string name="clear_search">Clear</string>
 
 </resources>

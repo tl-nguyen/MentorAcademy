@@ -1,7 +1,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/delete_books" android:title="@string/delete"
-        android:orderInCategory="100" android:showAsAction="always" android:icon="@drawable/delete" android:visible="false"/>
-    <item android:id="@+id/add_book" android:title="@string/add_text"
-        android:orderInCategory="100" android:showAsAction="always" android:icon="@drawable/plus"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/delete_books"
+        android:icon="@drawable/delete"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/delete"
+        android:visible="false" />
+    <item
+        android:id="@+id/add_book"
+        android:icon="@drawable/plus"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/add_text" />
+
+    <item
+        android:id="@+id/search"
+        android:orderInCategory="1"
+        android:title="@string/action_settings"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:icon="@android:drawable/ic_search_category_default"/>
+
+    <item
+        android:id="@+id/clearSearch"
+        android:orderInCategory="1"
+        android:title="@string/clear_search"
+        android:showAsAction="always" />
+
 </menu>

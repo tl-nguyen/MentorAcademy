@@ -1,6 +1,7 @@
 package com.tlnguyen.homework_catalog.activities;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private IBookCatalogDao mBookDao;
     private List<Book> mBooks;
     private List<Book> mSelectedBooks;
+    private List<Book> mSearchResults;
 
     private GridView mGvBooks;
     private Menu mMenu;
@@ -45,12 +47,45 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mBookDao = new BookCatalogDao(this);
         mBooks = mBookDao.getAll();
         mSelectedBooks = new ArrayList<Book>();
+        mSearchResults = new ArrayList<Book>();
 
         mGvBooks = (GridView) findViewById(R.id.gvBooks);
-        mBookAdapter = new BookAdapter(this, mBooks);
-        mGvBooks.setAdapter(mBookAdapter);
+        clearSearch();
         mGvBooks.setOnItemClickListener(this);
         mGvBooks.setOnItemLongClickListener(this);
+
+        handleIntent(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            mSearchResults = getResults(query);
+            mBookAdapter = new BookAdapter(this, mSearchResults);
+        } else {
+            mBookAdapter = new BookAdapter(this, mBooks);
+        }
+
+        mGvBooks.setAdapter(mBookAdapter);
+    }
+
+    private List<Book> getResults(String query) {
+
+        ArrayList<Book> queryResults = new ArrayList<Book>();
+
+        for (Book book: mBooks) {
+            if (book.getName().toLowerCase().contains(query.toLowerCase())) {
+                queryResults.add(book);
+            }
+        }
+
+        return queryResults;
     }
 
     @Override
@@ -79,9 +114,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             case R.id.delete_books:
                 removeSelectedBooks();
                 break;
+            case R.id.search:
+                onSearchRequested();
+                break;
+            case R.id.clearSearch:
+                clearSearch();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void clearSearch() {
+        mBookAdapter = new BookAdapter(this, mBooks);
+        mGvBooks.setAdapter(mBookAdapter);
     }
 
     private void goToAddBookScreen() {

@@ -15,7 +15,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.tlnguyen.cinemaapp.R;
 
-public class SignupActivity extends ActionBarActivity implements View.OnClickListener {
+public class SignUpActivity extends ActionBarActivity implements View.OnClickListener {
 
     private EditText mEtUsername;
     private EditText mEtPassword;
@@ -95,7 +95,7 @@ public class SignupActivity extends ActionBarActivity implements View.OnClickLis
             public void done(ParseException e) {
                 if (e == null) {
                     // Signed up successfully
-                    Intent homeIntent = new Intent(SignupActivity.this, HomeActivity.class);
+                    Intent homeIntent = new Intent(SignUpActivity.this, HomeActivity.class);
                     homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(homeIntent);

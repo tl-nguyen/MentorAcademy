@@ -12,15 +12,15 @@ import com.tlnguyen.cinemaapp.R;
 
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener{
 
-    private TextView mTvSignup;
+    private TextView mTvSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mTvSignup = (TextView) findViewById(R.id.tvSignup);
-        mTvSignup.setOnClickListener(this);
+        mTvSignUp = (TextView) findViewById(R.id.tvSignUp);
+        mTvSignUp.setOnClickListener(this);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         int id = v.getId();
 
         switch (id) {
-            case R.id.tvSignup:
+            case R.id.tvSignUp:
                 goToSignUp();
                 break;
         }
@@ -59,7 +59,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void goToSignUp() {
-        Intent signupIntent = new Intent(this, SignupActivity.class);
+        Intent signupIntent = new Intent(this, SignUpActivity.class);
         startActivity(signupIntent);
     }
 }

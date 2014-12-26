@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FragmentsPratices</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_simple_fragment_demo">SimpleFragmentDemoActivity</string>
+    <string name="im_simple">I\'m Simple</string>
+    <string name="simple_fragment_demo">Simple fragment demo</string>
+    <string name="title_activity_multi_fragment_demo">MultiFragmentDemoActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_view_pager_demo">ViewPagerDemoActivity</string>
+
+</resources>

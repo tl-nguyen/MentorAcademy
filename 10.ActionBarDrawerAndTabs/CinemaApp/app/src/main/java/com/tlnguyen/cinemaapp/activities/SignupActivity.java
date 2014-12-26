@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,28 +31,6 @@ public class SignUpActivity extends ActionBarActivity implements View.OnClickLis
         mBtnSignUp = (Button) findViewById(R.id.btnSignUp);
 
         mBtnSignUp.setOnClickListener(this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_signup, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -95,16 +71,20 @@ public class SignUpActivity extends ActionBarActivity implements View.OnClickLis
             public void done(ParseException e) {
                 if (e == null) {
                     // Signed up successfully
-                    Intent homeIntent = new Intent(SignUpActivity.this, HomeActivity.class);
-                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(homeIntent);
+                    goToHomeScreen();
                 }
                 else {
                     showAlert(getString(R.string.dialog_error_title), e.getMessage());
                 }
             }
         });
+    }
+
+    private void goToHomeScreen() {
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
     }
 
     private void showAlert(String title, String message) {

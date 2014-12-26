@@ -15,5 +15,6 @@
     <string name="email">Email</string>
     <string name="signup_invalid_inputs_message">The username, password and email fields can not be empty</string>
     <string name="dialog_error_title">Opaa!</string>
+    <string name="login_invalid_inputs_message">The username and password fields can not be empty</string>
 
 </resources>

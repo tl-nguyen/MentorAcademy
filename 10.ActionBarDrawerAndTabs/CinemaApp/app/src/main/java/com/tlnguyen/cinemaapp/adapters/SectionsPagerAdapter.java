@@ -6,7 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.tlnguyen.cinemaapp.R;
-import com.tlnguyen.cinemaapp.fragments.PlaceholderFragment;
+import com.tlnguyen.cinemaapp.fragments.CinemasFragment;
+import com.tlnguyen.cinemaapp.fragments.MoviesFragment;
 
 import java.util.Locale;
 
@@ -25,15 +26,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        switch (position) {
+            case 0:
+                return new CinemasFragment();
+            case 1:
+                return new MoviesFragment();
+        }
+
+        return new CinemasFragment();
     }
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
-        return 3;
+        // Show 2 total pages.
+        return 2;
     }
 
     @Override
@@ -44,8 +50,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return mContext.getString(R.string.title_section1).toUpperCase(l);
             case 1:
                 return mContext.getString(R.string.title_section2).toUpperCase(l);
-            case 2:
-                return mContext.getString(R.string.title_section3).toUpperCase(l);
         }
         return null;
     }

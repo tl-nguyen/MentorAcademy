@@ -13,5 +13,7 @@
     <string name="signup">Sign Up!</string>
     <string name="title_activity_signup">SignupActivity</string>
     <string name="email">Email</string>
+    <string name="signup_invalid_inputs_message">The username, password and email fields can not be empty</string>
+    <string name="dialog_error_title">Opaa!</string>
 
 </resources>

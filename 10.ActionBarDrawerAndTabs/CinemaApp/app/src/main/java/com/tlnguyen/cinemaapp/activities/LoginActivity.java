@@ -23,7 +23,6 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         mTvSignup.setOnClickListener(this);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

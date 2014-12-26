@@ -41,7 +41,12 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         if (currentUser == null) {
             goToLoginScreen();
         }
+        else {
+            init();
+        }
+    }
 
+    private void init() {
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

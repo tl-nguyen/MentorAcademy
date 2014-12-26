@@ -13,7 +13,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.tlnguyen.cinemaapp.R;
 
-public class SignUpActivity extends ActionBarActivity implements View.OnClickListener {
+public class SignupActivity extends ActionBarActivity implements View.OnClickListener {
 
     private EditText mEtUsername;
     private EditText mEtPassword;
@@ -25,6 +25,10 @@ public class SignUpActivity extends ActionBarActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        init();
+    }
+
+    private void init() {
         mEtUsername = (EditText) findViewById(R.id.etUsername);
         mEtPassword = (EditText) findViewById(R.id.etPassword);
         mEtEmail = (EditText) findViewById(R.id.etEmail);

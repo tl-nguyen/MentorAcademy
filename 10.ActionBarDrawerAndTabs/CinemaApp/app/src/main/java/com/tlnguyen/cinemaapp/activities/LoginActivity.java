@@ -26,6 +26,10 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        init();
+    }
+
+    private void init() {
         mEtUsername = (EditText) findViewById(R.id.etUsername);
         mEtPassword = (EditText) findViewById(R.id.etPassword);
         mBtnLogin = (Button) findViewById(R.id.btnLogin);
@@ -97,7 +101,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void goToSignUpScreen() {
-        Intent signUpIntent = new Intent(this, SignUpActivity.class);
+        Intent signUpIntent = new Intent(this, SignupActivity.class);
         startActivity(signUpIntent);
     }
 }

@@ -2,9 +2,16 @@
 <resources>
 
     <string name="app_name">CinemaApp</string>
-    <string name="title_section1">Cinemas</string>
-    <string name="title_section2">Movies</string>
+    <string name="cinemas_section">Cinemas</string>
+    <string name="movies_section">Movies</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up!</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="email">Email</string>
 
 </resources>

@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import com.tlnguyen.cinemaapp.R;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class CinemasFragment extends Fragment {
 
     public CinemasFragment() {

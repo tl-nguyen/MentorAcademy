@@ -33,7 +33,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return new MoviesFragment();
         }
 
-        return new CinemasFragment();
+        return null;
     }
 
     @Override

@@ -80,6 +80,15 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        // Change Tab to Movies if the previous page was Movie Detail
+        Intent comingIntent = getIntent();
+
+        boolean isFromMovieDetail = comingIntent.getBooleanExtra("FROM_MOVIE_DETAIL", false);
+
+        if (isFromMovieDetail) {
+            mViewPager.setCurrentItem(1);
+        }
     }
 
     private void goToLoginScreen() {

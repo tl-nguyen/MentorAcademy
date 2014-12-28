@@ -69,8 +69,6 @@ public class MovieAdapter extends BaseAdapter {
                     public void done(byte[] data, ParseException e) {
                         if (e == null) {
                             holder.coverImage.setImageBitmap(ImageResizer.decodeSampledBitmapFromByteArray(data, 100, 100));
-                        } else {
-                            // something went wrong
                         }
                     }
                 });

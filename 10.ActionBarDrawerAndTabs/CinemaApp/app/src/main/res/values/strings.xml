@@ -19,5 +19,10 @@
     <string name="logout">Logout</string>
     <string name="cinema_name">Cinema Name</string>
     <string name="movie_name">Movie Name</string>
+    <string name="title_activity_cinema_detail">CinemaDetailActivity</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="address">Address</string>
+    <string name="working_time">Working Time</string>
+    <string name="movies_available">Movies Available</string>
 
 </resources>

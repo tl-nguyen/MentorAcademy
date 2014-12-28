@@ -17,5 +17,7 @@
     <string name="dialog_error_title">Opaa!</string>
     <string name="login_invalid_inputs_message">The username and password fields can not be empty</string>
     <string name="logout">Logout</string>
+    <string name="cinema_name">Cinema Name</string>
+    <string name="movie_name">Movie Name</string>
 
 </resources>

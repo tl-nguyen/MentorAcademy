@@ -183,6 +183,7 @@ public class MovieDetailActivity extends ActionBarActivity implements AdapterVie
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Cinema selectedCinema = mMovieCinemas.get(position).getCinema();
+                        ParseUser currentUser = ParseUser.getCurrentUser();
 
                         int availableQuantity = mMovieCinemas.get(position).getAvailableSeats();
                         int orderedQuantity = Integer.parseInt(mEtQuantity.getText().toString());
@@ -193,30 +194,7 @@ public class MovieDetailActivity extends ActionBarActivity implements AdapterVie
                         }
                         else {
                             // Make new order and save it
-
-                            ParseUser currentUser = ParseUser.getCurrentUser();
-
-                            Order order = new Order();
-                            order.setMovie(mMovie);
-                            order.setCinema(selectedCinema);
-                            order.setCreatedBy(currentUser);
-                            order.setQuantity(orderedQuantity);
-
-                            mMovieCinemas.get(position).setAvailableSeats(availableQuantity - orderedQuantity);
-                            mMovieCinemaAdapter.notifyDataSetChanged();
-
-                            try {
-                                order.save();
-                                mMovieCinemas.get(position).save();
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                            Toast.makeText(MovieDetailActivity.this, String.format(getString(R.string.success_order_message),
-                                    currentUser.getUsername(),
-                                    orderedQuantity,
-                                    mMovie.getTitle(),
-                                    selectedCinema.getTitle()), Toast.LENGTH_SHORT).show();
+                            makeOrder(selectedCinema, currentUser, availableQuantity, orderedQuantity, position);
                         }
                     }
                 })
@@ -224,5 +202,29 @@ public class MovieDetailActivity extends ActionBarActivity implements AdapterVie
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void makeOrder(Cinema selectedCinema, ParseUser currentUser, int availableQuantity, int orderedQuantity, int position) {
+        Order order = new Order();
+        order.setMovie(mMovie);
+        order.setCinema(selectedCinema);
+        order.setCreatedBy(currentUser);
+        order.setQuantity(orderedQuantity);
+
+        mMovieCinemas.get(position).setAvailableSeats(availableQuantity - orderedQuantity);
+        mMovieCinemaAdapter.notifyDataSetChanged();
+
+        try {
+            order.save();
+            mMovieCinemas.get(position).save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this, String.format(getString(R.string.success_order_message),
+                currentUser.getUsername(),
+                orderedQuantity,
+                mMovie.getTitle(),
+                selectedCinema.getTitle()), Toast.LENGTH_LONG).show();
     }
 }

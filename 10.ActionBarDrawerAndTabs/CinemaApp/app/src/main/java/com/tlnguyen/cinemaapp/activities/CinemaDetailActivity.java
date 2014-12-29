@@ -16,6 +16,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.tlnguyen.cinemaapp.R;
+import com.tlnguyen.cinemaapp.commons.Constants;
 import com.tlnguyen.cinemaapp.helpers.ImageResizer;
 import com.tlnguyen.cinemaapp.models.Cinema;
 
@@ -39,11 +40,11 @@ public class CinemaDetailActivity extends ActionBarActivity implements View.OnCl
     }
 
     private void initData() {
-        String cinemaId = getIntent().getStringExtra("CINEMA_ID");
+        String cinemaId = getIntent().getStringExtra(Constants.CINEMA_ID);
 
         if (cinemaId != null) {
-            ParseQuery<Cinema> query = new ParseQuery<Cinema>("Cinema");
-            query.whereEqualTo("objectId", cinemaId);
+            ParseQuery<Cinema> query = new ParseQuery<Cinema>(Constants.CINEMA_CLASS_NAME);
+            query.whereEqualTo(Constants.ID_FIELD_NAME, cinemaId);
             try {
                 mCinema = query.find().get(0);
             } catch (ParseException e) {
@@ -133,8 +134,15 @@ public class CinemaDetailActivity extends ActionBarActivity implements View.OnCl
 
         switch (id) {
             case R.id.btnMoviesAvailable:
-
+                goToMoviesAvailableList();
                 break;
         }
+    }
+
+    private void goToMoviesAvailableList() {
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        homeIntent.putExtra(Constants.TO_MOVIES_TAB, true);
+        homeIntent.putExtra(Constants.CINEMA_ID, mCinema.getObjectId());
+        startActivity(homeIntent);
     }
 }

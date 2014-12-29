@@ -9,15 +9,23 @@ import android.view.MenuItem;
 
 import com.parse.ParseUser;
 import com.tlnguyen.cinemaapp.R;
+import com.tlnguyen.cinemaapp.commons.Constants;
 
 public class MovieDetailActivity extends ActionBarActivity {
+
+    private String mCinemaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        initData();
         initViews();
+    }
+
+    private void initData() {
+        mCinemaId = getIntent().getStringExtra(Constants.CINEMA_ID);
     }
 
     private void initViews() {
@@ -58,7 +66,10 @@ public class MovieDetailActivity extends ActionBarActivity {
 
     private void goToMovies() {
         Intent homeIntent = new Intent(this, HomeActivity.class);
-        homeIntent.putExtra("FROM_MOVIE_DETAIL", true);
+        homeIntent.putExtra(Constants.TO_MOVIES_TAB, true);
+        if (mCinemaId != null) {
+            homeIntent.putExtra(Constants.CINEMA_ID, mCinemaId);
+        }
         startActivity(homeIntent);
     }
 

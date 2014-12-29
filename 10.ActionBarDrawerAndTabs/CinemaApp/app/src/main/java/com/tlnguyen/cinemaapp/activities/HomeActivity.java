@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.parse.ParseUser;
 import com.tlnguyen.cinemaapp.R;
 import com.tlnguyen.cinemaapp.adapters.SectionsPagerAdapter;
+import com.tlnguyen.cinemaapp.commons.Constants;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -84,9 +85,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // Change Tab to Movies if the previous page was Movie Detail
         Intent comingIntent = getIntent();
 
-        boolean isFromMovieDetail = comingIntent.getBooleanExtra("FROM_MOVIE_DETAIL", false);
+        boolean toMoviesTab = comingIntent.getBooleanExtra(Constants.TO_MOVIES_TAB, false);
 
-        if (isFromMovieDetail) {
+        if (toMoviesTab) {
             mViewPager.setCurrentItem(1);
         }
     }

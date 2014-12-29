@@ -14,6 +14,7 @@ import com.parse.ParseQuery;
 import com.tlnguyen.cinemaapp.R;
 import com.tlnguyen.cinemaapp.activities.CinemaDetailActivity;
 import com.tlnguyen.cinemaapp.adapters.CinemaAdapter;
+import com.tlnguyen.cinemaapp.commons.Constants;
 import com.tlnguyen.cinemaapp.models.Cinema;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class CinemasFragment extends Fragment implements AdapterView.OnItemClick
     }
 
     private void initData() {
-        ParseQuery<Cinema> query = new ParseQuery<Cinema>("Cinema");
+        ParseQuery<Cinema> query = new ParseQuery<Cinema>(Constants.CINEMA_CLASS_NAME);
         try {
             mCinemas = query.find();
             mCinemaAdapter = new CinemaAdapter(getActivity(), mCinemas);
@@ -63,7 +64,7 @@ public class CinemasFragment extends Fragment implements AdapterView.OnItemClick
 
     private void goToCinemaDetail(int position) {
         Intent cinemaDetailIntent = new Intent(getActivity(), CinemaDetailActivity.class);
-        cinemaDetailIntent.putExtra("CINEMA_ID", mCinemas.get(position).getObjectId());
+        cinemaDetailIntent.putExtra(Constants.CINEMA_ID, mCinemas.get(position).getObjectId());
         startActivity(cinemaDetailIntent);
     }
 }

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +17,8 @@ import com.parse.ParseQuery;
 import com.tlnguyen.cinemaapp.R;
 import com.tlnguyen.cinemaapp.activities.MovieDetailActivity;
 import com.tlnguyen.cinemaapp.adapters.MovieAdapter;
+import com.tlnguyen.cinemaapp.commons.Constants;
+import com.tlnguyen.cinemaapp.models.Cinema;
 import com.tlnguyen.cinemaapp.models.Movie;
 
 import java.util.List;
@@ -21,12 +26,47 @@ import java.util.List;
 public class MoviesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private List<Movie> mMovies;
+    private String mCinemaId;
 
     private ListView mLvMovies;
 
     private MovieAdapter mMovieAdapter;
 
     public MoviesFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_movies, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_clear:
+                // Reset to show all the movies
+                resetMovies();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void resetMovies() {
+        retrieveAllMovies();
+        mLvMovies.setAdapter(mMovieAdapter);
+        mCinemaId = null;
     }
 
     @Override
@@ -41,13 +81,42 @@ public class MoviesFragment extends Fragment implements AdapterView.OnItemClickL
     }
 
     private void initData() {
-        ParseQuery<Movie> query = new ParseQuery<Movie>("Movie");
+
+        mCinemaId = getActivity().getIntent().getStringExtra(Constants.CINEMA_ID);
+
+        if (mCinemaId != null) {
+            // Show the movies available for this Cinema
+            retrieveMoviesByCinema(mCinemaId);
+        }
+        else {
+            // Show all the movies
+            retrieveAllMovies();
+        }
+    }
+
+    private void retrieveAllMovies() {
+        ParseQuery<Movie> query = new ParseQuery<Movie>(Constants.MOVIE_CLASS_NAME);
         try {
             mMovies = query.find();
-            mMovieAdapter = new MovieAdapter(getActivity(), mMovies);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        mMovieAdapter = new MovieAdapter(getActivity(), mMovies);
+    }
+
+    private void retrieveMoviesByCinema(String cinemaId) {
+        ParseQuery<Cinema> query = new ParseQuery<Cinema>(Constants.CINEMA_CLASS_NAME);
+        query.whereEqualTo(Constants.ID_FIELD_NAME, cinemaId);
+
+        try {
+            Cinema cinema = query.find().get(0);
+            mMovies = cinema.getMovies();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        mMovieAdapter = new MovieAdapter(getActivity(), mMovies);
     }
 
     private void initViews(View rootView) {
@@ -63,7 +132,10 @@ public class MoviesFragment extends Fragment implements AdapterView.OnItemClickL
 
     private void goToMovieDetail(int position) {
         Intent movieDetailIntent = new Intent(getActivity(), MovieDetailActivity.class);
-        movieDetailIntent.putExtra("MOVIE_ID", mMovies.get(position).getObjectId());
+        movieDetailIntent.putExtra(Constants.MOVIE_ID, mMovies.get(position).getObjectId());
+        if (mCinemaId != null) {
+            movieDetailIntent.putExtra(Constants.CINEMA_ID, mCinemaId);
+        }
         startActivity(movieDetailIntent);
     }
 }

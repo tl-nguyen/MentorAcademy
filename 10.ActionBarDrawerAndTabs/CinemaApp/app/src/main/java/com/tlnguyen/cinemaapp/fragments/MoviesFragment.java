@@ -20,7 +20,9 @@ import com.tlnguyen.cinemaapp.adapters.MovieAdapter;
 import com.tlnguyen.cinemaapp.commons.Constants;
 import com.tlnguyen.cinemaapp.models.Cinema;
 import com.tlnguyen.cinemaapp.models.Movie;
+import com.tlnguyen.cinemaapp.models.MovieCinema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesFragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -106,12 +108,31 @@ public class MoviesFragment extends Fragment implements AdapterView.OnItemClickL
     }
 
     private void retrieveMoviesByCinema(String cinemaId) {
-        ParseQuery<Cinema> query = new ParseQuery<Cinema>(Constants.CINEMA_CLASS_NAME);
-        query.whereEqualTo(Constants.ID_FIELD_NAME, cinemaId);
+        Cinema cinema = null;
+
+        // Request Cinema object first
+        ParseQuery<Cinema> cinemaQuery = new ParseQuery<Cinema>(Constants.CINEMA_CLASS_NAME);
+        cinemaQuery.whereEqualTo(Constants.ID_FIELD_NAME, cinemaId);
 
         try {
-            Cinema cinema = query.find().get(0);
-            mMovies = cinema.getMovies();
+            cinema = cinemaQuery.find().get(0);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // Request all the movies related to the cinema
+        ParseQuery<MovieCinema> movieCinemasQuery = new ParseQuery<MovieCinema>("MovieCinema");
+        movieCinemasQuery.whereEqualTo("cinema", cinema);
+
+        try {
+            List<MovieCinema> movieCinemas = movieCinemasQuery.find();
+            mMovies = new ArrayList<Movie>();
+
+            for (MovieCinema movieCinema: movieCinemas) {
+                // Set the related movies to mMovies
+                mMovies.add(movieCinema.getMovie());
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

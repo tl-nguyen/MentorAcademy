@@ -4,6 +4,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.tlnguyen.cinemaapp.models.Cinema;
 import com.tlnguyen.cinemaapp.models.Movie;
+import com.tlnguyen.cinemaapp.models.MovieCinema;
 
 import java.util.ArrayList;
 
@@ -17,21 +18,21 @@ public class DataSeed {
         cinema1.setAddress("София, ул.\"Черни връх\" 100, Paradise Center");
         cinema1.setWorkingTime("10:00AM - 12:00PM");
         cinema1.setPhotos(new ArrayList<ParseFile>());
-        cinema1.setMovies(new ArrayList<Movie>());
+//        cinema1.setMovies(new ArrayList<Movie>());
 
         Cinema cinema2 = new Cinema();
         cinema2.setTitle("Арена Deluxe BulgariaMall");
         cinema2.setAddress("Бул. България 69, Търговски център Bulgaria Mall");
         cinema2.setWorkingTime("09:00AM - 12:00PM");
         cinema2.setPhotos(new ArrayList<ParseFile>());
-        cinema2.setMovies(new ArrayList<Movie>());
+//        cinema2.setMovies(new ArrayList<Movie>());
 
         Cinema cinema3 = new Cinema();
         cinema3.setTitle("Арена Младост");
         cinema3.setAddress("Адрес: ж.к. Младост 4, ул. Бизнес Парк 3");
         cinema3.setWorkingTime("09:00AM - 12:00PM");
         cinema3.setPhotos(new ArrayList<ParseFile>());
-        cinema3.setMovies(new ArrayList<Movie>());
+//        cinema3.setMovies(new ArrayList<Movie>());
 
         saveCinemas(cinema1, cinema2, cinema3);
 
@@ -64,19 +65,68 @@ public class DataSeed {
         saveMovies(movie1, movie2, movie3, movie4, movie5);
 
         // Add Movies To Cinemas Relations
-        cinema1.getMovies().add(movie1);
-        cinema1.getMovies().add(movie3);
-        cinema1.getMovies().add(movie4);
 
-        cinema2.getMovies().add(movie2);
-        cinema2.getMovies().add(movie3);
-        cinema2.getMovies().add(movie5);
+        MovieCinema rel1 = new MovieCinema();
+        rel1.setAvailableSeats(100);
+        rel1.setCinema(cinema1);
+        rel1.setMovie(movie1);
 
-        cinema3.getMovies().add(movie1);
-        cinema3.getMovies().add(movie4);
-        cinema3.getMovies().add(movie5);
+        MovieCinema rel2 = new MovieCinema();
+        rel2.setAvailableSeats(100);
+        rel2.setCinema(cinema1);
+        rel2.setMovie(movie3);
 
-        saveCinemas(cinema1, cinema2, cinema3);
+        MovieCinema rel3 = new MovieCinema();
+        rel3.setAvailableSeats(100);
+        rel3.setCinema(cinema1);
+        rel3.setMovie(movie4);
+
+        MovieCinema rel4 = new MovieCinema();
+        rel4.setAvailableSeats(100);
+        rel4.setCinema(cinema2);
+        rel4.setMovie(movie2);
+
+        MovieCinema rel5 = new MovieCinema();
+        rel5.setAvailableSeats(100);
+        rel5.setCinema(cinema2);
+        rel5.setMovie(movie3);
+
+        MovieCinema rel6 = new MovieCinema();
+        rel6.setAvailableSeats(100);
+        rel6.setCinema(cinema2);
+        rel6.setMovie(movie5);
+
+        MovieCinema rel7 = new MovieCinema();
+        rel7.setAvailableSeats(100);
+        rel7.setCinema(cinema3);
+        rel7.setMovie(movie1);
+
+        MovieCinema rel8 = new MovieCinema();
+        rel8.setAvailableSeats(100);
+        rel8.setCinema(cinema3);
+        rel8.setMovie(movie4);
+
+        MovieCinema rel9 = new MovieCinema();
+        rel9.setAvailableSeats(100);
+        rel9.setCinema(cinema3);
+        rel9.setMovie(movie5);
+
+//        // Add Movies To Cinemas Relations
+//        cinema1.getMovies().add(movie1);
+//        cinema1.getMovies().add(movie3);
+//        cinema1.getMovies().add(movie4);
+//
+//        cinema2.getMovies().add(movie2);
+//        cinema2.getMovies().add(movie3);
+//        cinema2.getMovies().add(movie5);
+//
+//        cinema3.getMovies().add(movie1);
+//        cinema3.getMovies().add(movie4);
+//        cinema3.getMovies().add(movie5);
+//
+//        saveCinemas(cinema1, cinema2, cinema3);
+
+        saveRelations(rel1, rel2, rel3, rel4, rel5, rel6, rel7, rel8, rel9);
 
         // Populate Photos
         new DownloadCinemaPhotosTask(cinema1).execute("http://www.cinemacity.bg/media/iti_cz/content/bg/imgs/cinema_bullet_paradise.jpg");
@@ -100,6 +150,22 @@ public class DataSeed {
         new DownloadMoviePictureTask(movie4).execute("http://85.14.28.164/d/images/photos_movies/3137-resized.jpg");
 
         new DownloadMoviePictureTask(movie5).execute("http://85.14.28.164/d/images/photos_movies/3277-resized.jpg");
+    }
+
+    private static void saveRelations(MovieCinema rel1, MovieCinema rel2, MovieCinema rel3, MovieCinema rel4, MovieCinema rel5, MovieCinema rel6, MovieCinema rel7, MovieCinema rel8, MovieCinema rel9) {
+        try {
+            rel1.save();
+            rel2.save();
+            rel3.save();
+            rel4.save();
+            rel5.save();
+            rel6.save();
+            rel7.save();
+            rel8.save();
+            rel9.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void saveCinemas(Cinema cinema1, Cinema cinema2, Cinema cinema3) {

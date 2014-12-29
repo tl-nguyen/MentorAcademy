@@ -69,24 +69,21 @@ public class CinemaDetailActivity extends ActionBarActivity implements View.OnCl
         }
 
         // Set Photos
-        if (mCinema.getPhotos() != null) {
-
-            mCinema.getPhotos().get(1).getDataInBackground(new GetDataCallback() {
-                public void done(byte[] data, ParseException e) {
-                    if (e == null) {
-                        ivPhoto1.setImageBitmap(ImageResizer.decodeSampledBitmapFromByteArray(data, 100, 100));
-                    }
+        mCinema.getPhotos().get(1).getDataInBackground(new GetDataCallback() {
+            public void done(byte[] data, ParseException e) {
+                if (e == null) {
+                    ivPhoto1.setImageBitmap(ImageResizer.decodeSampledBitmapFromByteArray(data, 100, 100));
                 }
-            });
+            }
+        });
 
-            mCinema.getPhotos().get(2).getDataInBackground(new GetDataCallback() {
-                public void done(byte[] data, ParseException e) {
-                    if (e == null) {
-                        ivPhoto2.setImageBitmap(ImageResizer.decodeSampledBitmapFromByteArray(data, 100, 100));
-                    }
+        mCinema.getPhotos().get(2).getDataInBackground(new GetDataCallback() {
+            public void done(byte[] data, ParseException e) {
+                if (e == null) {
+                    ivPhoto2.setImageBitmap(ImageResizer.decodeSampledBitmapFromByteArray(data, 100, 100));
                 }
-            });
-        }
+            }
+        });
 
         // Set Address and Working Time
         tvAddress.setText(mCinema.getAddress());

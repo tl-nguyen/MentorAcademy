@@ -41,11 +41,11 @@ public class Cinema extends ParseObject{
         put("photos", value);
     }
 
-    public List<Movie> getMovies() {
-        return getList("movies");
-    }
-
-    public void setMovies(List<Movie> value) {
-        put("movies", value);
-    }
+//    public List<Movie> getMovies() {
+//        return getList("movies");
+//    }
+//
+//    public void setMovies(List<Movie> value) {
+//        put("movies", value);
+//    }
 }

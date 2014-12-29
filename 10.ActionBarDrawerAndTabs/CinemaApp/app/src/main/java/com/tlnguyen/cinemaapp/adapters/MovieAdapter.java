@@ -43,20 +43,20 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View cell = convertView;
+        View row = convertView;
         final MovieHolder holder;
 
-        if (cell == null) {
-            cell = LayoutInflater.from(mContext).inflate(R.layout.movie_row, parent, false);
+        if (row == null) {
+            row = LayoutInflater.from(mContext).inflate(R.layout.movie_row, parent, false);
 
             holder = new MovieHolder();
-            holder.movieTitle = (TextView) cell.findViewById(R.id.tvMovieTitle);
-            holder.coverImage = (ImageView) cell.findViewById(R.id.ivCoverImage);
+            holder.movieTitle = (TextView) row.findViewById(R.id.tvMovieTitle);
+            holder.coverImage = (ImageView) row.findViewById(R.id.ivCoverImage);
 
-            cell.setTag(holder);
+            row.setTag(holder);
         }
         else {
-            holder = (MovieHolder) cell.getTag();
+            holder = (MovieHolder) row.getTag();
         }
 
         Movie movie = this.mMovies.get(position);
@@ -75,7 +75,7 @@ public class MovieAdapter extends BaseAdapter {
             }
         }
 
-        return cell;
+        return row;
     }
 
     static class MovieHolder {

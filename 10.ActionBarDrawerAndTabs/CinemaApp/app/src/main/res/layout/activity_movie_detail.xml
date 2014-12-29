@@ -24,12 +24,22 @@
         android:layout_below="@+id/ivPhoto"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/order_info"
+        android:id="@+id/tvOrderInfo"
+        android:layout_below="@+id/tvCast"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_red_dark"/>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lvMovieCinema"
+        android:id="@+id/lvMovieCinemas"
         android:layout_below="@+id/tvCast"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="118dp" />
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.tlnguyen.cinemaapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class MovieCinemaAdapter extends BaseAdapter{
             holder = new MovieCinemaHolder();
             holder.cinemaTitle = (TextView) row.findViewById(R.id.tvCinemaTitle);
             holder.availableSeats = (TextView) row.findViewById(R.id.tvAvailableSeat);
+            holder.view = row;
 
             row.setTag(holder);
         }
@@ -59,7 +61,10 @@ public class MovieCinemaAdapter extends BaseAdapter{
 
         if (movieCinema != null) {
             holder.cinemaTitle.setText(movieCinema.getCinema().getTitle());
-            holder.availableSeats.setText(movieCinema.getAvailableSeats());
+            holder.availableSeats.setText(String.valueOf(movieCinema.getAvailableSeats()));
+            if (movieCinema.getAvailableSeats() == 0) {
+                holder.view.setBackgroundColor(Color.GRAY);
+            }
         }
 
         return row;
@@ -68,5 +73,6 @@ public class MovieCinemaAdapter extends BaseAdapter{
     static class MovieCinemaHolder {
         private TextView cinemaTitle;
         private TextView availableSeats;
+        private View view;
     }
 }

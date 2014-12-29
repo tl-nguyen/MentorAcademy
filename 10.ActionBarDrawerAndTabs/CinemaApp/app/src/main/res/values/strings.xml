@@ -28,5 +28,12 @@
     <string name="cast">Cast</string>
     <string name="available_seat_label">Available Seats:</string>
     <string name="available_seat_sample">100</string>
+    <string name="order_info">!Click on the cinema to order</string>
+    <string name="cancel">Cancel</string>
+    <string name="reserve">Reserve</string>
+    <string name="tickets_quantity_order">Enter the quantity of tickets you want to order</string>
+    <string name="invalid_order_warning">You can\'t order more than %1$s tickets</string>
+    <string name="no_more_tickets">Sorry! No more tickets</string>
+    <string name="success_order_message">User %1$s has reserved %2$d tickets for %3$s movie at %4$s cinema!</string>
 
 </resources>

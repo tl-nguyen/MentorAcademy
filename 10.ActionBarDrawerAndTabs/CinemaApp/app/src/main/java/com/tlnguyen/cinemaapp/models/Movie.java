@@ -4,8 +4,6 @@ import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
-import java.util.List;
-
 @ParseClassName("Movie")
 public class Movie extends ParseObject {
 
@@ -25,11 +23,11 @@ public class Movie extends ParseObject {
         put("picture", value);
     }
 
-    public List<Cinema> getCinemas() {
-        return getList("cinemas");
+    public String getCast() {
+        return getString("cast");
     }
 
-    public void setCinemas(List<Cinema> value) {
-        put("cinemas", value);
+    public void setCast(String value) {
+        put("cast", value);
     }
 }

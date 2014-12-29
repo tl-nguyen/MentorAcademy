@@ -18,21 +18,18 @@ public class DataSeed {
         cinema1.setAddress("София, ул.\"Черни връх\" 100, Paradise Center");
         cinema1.setWorkingTime("10:00AM - 12:00PM");
         cinema1.setPhotos(new ArrayList<ParseFile>());
-//        cinema1.setMovies(new ArrayList<Movie>());
 
         Cinema cinema2 = new Cinema();
         cinema2.setTitle("Арена Deluxe BulgariaMall");
         cinema2.setAddress("Бул. България 69, Търговски център Bulgaria Mall");
         cinema2.setWorkingTime("09:00AM - 12:00PM");
         cinema2.setPhotos(new ArrayList<ParseFile>());
-//        cinema2.setMovies(new ArrayList<Movie>());
 
         Cinema cinema3 = new Cinema();
         cinema3.setTitle("Арена Младост");
         cinema3.setAddress("Адрес: ж.к. Младост 4, ул. Бизнес Парк 3");
         cinema3.setWorkingTime("09:00AM - 12:00PM");
         cinema3.setPhotos(new ArrayList<ParseFile>());
-//        cinema3.setMovies(new ArrayList<Movie>());
 
         saveCinemas(cinema1, cinema2, cinema3);
 
@@ -65,7 +62,6 @@ public class DataSeed {
         saveMovies(movie1, movie2, movie3, movie4, movie5);
 
         // Add Movies To Cinemas Relations
-
         MovieCinema rel1 = new MovieCinema();
         rel1.setAvailableSeats(100);
         rel1.setCinema(cinema1);
@@ -110,21 +106,6 @@ public class DataSeed {
         rel9.setAvailableSeats(100);
         rel9.setCinema(cinema3);
         rel9.setMovie(movie5);
-
-//        // Add Movies To Cinemas Relations
-//        cinema1.getMovies().add(movie1);
-//        cinema1.getMovies().add(movie3);
-//        cinema1.getMovies().add(movie4);
-//
-//        cinema2.getMovies().add(movie2);
-//        cinema2.getMovies().add(movie3);
-//        cinema2.getMovies().add(movie5);
-//
-//        cinema3.getMovies().add(movie1);
-//        cinema3.getMovies().add(movie4);
-//        cinema3.getMovies().add(movie5);
-//
-//        saveCinemas(cinema1, cinema2, cinema3);
 
         saveRelations(rel1, rel2, rel3, rel4, rel5, rel6, rel7, rel8, rel9);
 

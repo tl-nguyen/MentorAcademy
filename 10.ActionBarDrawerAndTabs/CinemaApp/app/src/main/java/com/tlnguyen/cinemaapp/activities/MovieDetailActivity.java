@@ -72,8 +72,8 @@ public class MovieDetailActivity extends ActionBarActivity implements AdapterVie
         }
 
         // Request MovieCinema objects
-        ParseQuery<MovieCinema> movieCinemasQuery = new ParseQuery<MovieCinema>("MovieCinema");
-        movieCinemasQuery.whereEqualTo("movie", mMovie);
+        ParseQuery<MovieCinema> movieCinemasQuery = new ParseQuery<MovieCinema>(Constants.MOVIECINEMA_CLASS_NAME);
+        movieCinemasQuery.whereEqualTo(Constants.MOVIECINEMA_MOVIE_FIELD, mMovie);
 
         try {
             mMovieCinemas = movieCinemasQuery.find();

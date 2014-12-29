@@ -30,6 +30,8 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void init() {
+        getSupportActionBar().hide();
+
         mEtUsername = (EditText) findViewById(R.id.etUsername);
         mEtPassword = (EditText) findViewById(R.id.etPassword);
         mBtnLogin = (Button) findViewById(R.id.btnLogin);

@@ -9,5 +9,7 @@ public class Constants {
 
     public static final String CINEMA_CLASS_NAME = "Cinema";
     public static final String MOVIE_CLASS_NAME = "Movie";
+    public static final String MOVIECINEMA_CLASS_NAME = "MovieCinema";
+    public static final String MOVIECINEMA_MOVIE_FIELD = "movie";
 
 }

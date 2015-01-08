@@ -126,7 +126,8 @@ public class MovieDetailActivity extends ActionBarActivity implements AdapterVie
 
         switch (id) {
             case android.R.id.home:
-                goToMovies();
+//                goToMovies();
+                finish();
                 break;
             case R.id.action_logout:
                 logout();

@@ -1,0 +1,27 @@
+{
+  "employees": [
+    {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    {
+      "firstName": "Anna",
+      "lastName": "Smith"
+    },
+    {
+      "firstName": "Peter",
+      "lastName": "Jones"
+    }
+  ],
+  "movies": [
+    {
+      "name": "Movie1"
+    },
+    {
+      "name": "Movie2"
+    },
+    {
+      "name": "Movie3"
+    }
+  ]
+}

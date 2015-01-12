@@ -35,7 +35,6 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         Log.d("ASYNCTASK", s);
-
     }
 
     @Override

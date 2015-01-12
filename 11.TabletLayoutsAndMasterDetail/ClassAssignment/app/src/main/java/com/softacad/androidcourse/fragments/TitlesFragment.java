@@ -2,6 +2,10 @@ package com.softacad.androidcourse.fragments;
 
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -94,7 +98,25 @@ public class TitlesFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         Log.d(Constants.TAG, "onListItemClick position is" + position);
+
+        makeNotification(position);
         showDetails(position);
+    }
+
+    private void makeNotification(int position) {
+        Notification.Builder notificationBuilder = new Notification.Builder(getActivity())
+                .setContentTitle("First Notification")
+                .setContentText("First notification is fired!")
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setAutoCancel(true);
+
+        Intent intent = new Intent();
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
+        notificationBuilder.setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+
+        notificationManager.notify(1, notificationBuilder.build());
     }
 
     // Helper function to show the details of a selected item, either by displaying a fragment

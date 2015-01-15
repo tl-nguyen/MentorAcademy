@@ -1,7 +1,9 @@
-package com.tlnguyen.assignment;
+package com.tlnguyen.assignment.activities;
 
 import android.app.ListActivity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.tlnguyen.assignment.R;
+import com.tlnguyen.assignment.data.Constants;
 import com.tlnguyen.assignment.models.Day;
 
 import org.apache.http.HttpEntity;
@@ -89,35 +94,34 @@ public class MainActivity extends ListActivity {
         mDaysAdapter.notifyDataSetChanged();
     }
 
-    private class DownloadTask extends AsyncTask<String, Void, String> {
+    private class DownloadTask extends AsyncTask<String, Void, ArrayList<Day>> {
 
         @Override
-        protected void onPostExecute(String s) {
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray days = jsonObject.getJSONArray("list");
+        protected void onPostExecute(ArrayList<Day> days) {
+            Cursor cursor = MainActivity.this.getContentResolver().query(Constants.CONTENT_URI, null, null, null, null);
 
-                for (int i = 0; i < days.length(); i ++) {
+            if (!cursor.moveToFirst()) {
+                Toast.makeText(MainActivity.this, "no content yet!", Toast.LENGTH_LONG).show();
+            }
+            else {
+                do {
                     Day day = new Day();
-
-                    JSONObject currentDay = days.getJSONObject(i);
-                    day.setTemp(currentDay.getJSONObject("temp").getString("day"));
-                    day.setHumidity(currentDay.getString("humidity"));
-                    day.setPressure(currentDay.getString("pressure"));
-                    day.setDescription(currentDay.getJSONArray("weather").getJSONObject(0).getString("description"));
+                    day.setTemp(cursor.getString(cursor.getColumnIndex(Constants.COL_TEMP)));
+                    day.setHumidity(cursor.getString(cursor.getColumnIndex(Constants.COL_HUMIDITY)));
+                    day.setPressure(cursor.getString(cursor.getColumnIndex(Constants.COL_PRESSURE)));
+                    day.setDescription(cursor.getString(cursor.getColumnIndex(Constants.COL_DESCRIPTION)));
 
                     mDays.add(day);
+                    mDaysAdapter.notifyDataSetChanged();
                 }
-
-                mDaysAdapter.notifyDataSetChanged();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                while (cursor.moveToNext());
             }
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected ArrayList<Day> doInBackground(String... params) {
             String resultString = "";
+            ArrayList<Day> days;
 
             try {
 
@@ -144,11 +148,49 @@ public class MainActivity extends ListActivity {
                     inputStream.close();
                 }
 
+                days = handleJSON(resultString);
+
             } catch (IOException e) {
-                return e.toString();
+                return null;
             }
 
-            return resultString;
+            return days;
+        }
+
+        private ArrayList<Day> handleJSON(String resultString) {
+            ArrayList<Day> daysObjs = new ArrayList<Day>();
+
+            try {
+                JSONObject jsonObject = new JSONObject(resultString);
+                JSONArray days = jsonObject.getJSONArray("list");
+
+                for (int i = 0; i < days.length(); i ++) {
+                    Day day = new Day();
+
+                    JSONObject currentDay = days.getJSONObject(i);
+                    day.setTemp(currentDay.getJSONObject("temp").getString("day"));
+                    day.setHumidity(currentDay.getString("humidity"));
+                    day.setPressure(currentDay.getString("pressure"));
+                    day.setDescription(currentDay.getJSONArray("weather").getJSONObject(0).getString("description"));
+                    daysObjs.add(day);
+
+                    saveToSQLite(day);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return daysObjs;
+        }
+
+        private void saveToSQLite(Day day) {
+            ContentValues values = new ContentValues();
+            values.put(Constants.COL_TEMP, day.getTemp());
+            values.put(Constants.COL_PRESSURE, day.getPressure());
+            values.put(Constants.COL_HUMIDITY, day.getHumidity());
+            values.put(Constants.COL_DESCRIPTION, day.getDescription());
+
+            MainActivity.this.getContentResolver().insert(Constants.CONTENT_URI, values);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.tlnguyen.assignment;
+package com.tlnguyen.assignment.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.tlnguyen.assignment.R;
 import com.tlnguyen.assignment.models.Day;
 
 

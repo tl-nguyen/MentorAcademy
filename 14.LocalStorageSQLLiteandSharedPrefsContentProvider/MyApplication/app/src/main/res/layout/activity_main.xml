@@ -5,4 +5,47 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insert"
+        android:id="@+id/btnInsert"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:onClick="addBirthday"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select "
+        android:id="@+id/btnSelect"
+        android:layout_below="@+id/btnInsert"
+        android:layout_centerHorizontal="true"
+        android:onClick="selectBirthday"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/btnDelete"
+        android:layout_below="@+id/btnSelect"
+        android:layout_centerHorizontal="true"
+        android:onClick="deleteBirthday"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etName"
+        android:hint="Please select name..."
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etBirthday"
+        android:hint="Please select date"
+        android:layout_below="@+id/etName"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

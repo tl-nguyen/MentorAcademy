@@ -1,39 +1,59 @@
 package com.tlnguyen.classdemo;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private String filename = "TEST_FILE";
+    private String fileExtension = ".txt";
+    private String file = filename + fileExtension;
+    private String fileContent = "Sample text for our file";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        writeToFile(file);
+        writeToExternalStorageFile(file);
     }
 
+    private void writeToExternalStorageFile(String fileName) {
+        File file;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        String state = Environment.getExternalStorageState();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), fileName);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+                writer.write(fileContent);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void writeToFile(String fileName) {
+        File file;
+        file = new File(this.getFilesDir(), fileName);
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            writer.write(fileContent);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

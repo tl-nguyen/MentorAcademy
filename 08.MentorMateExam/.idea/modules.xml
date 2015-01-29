@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/08.MentorMateExam.iml" filepath="$PROJECT_DIR$/08.MentorMateExam.iml" />
       <module fileurl="file://$PROJECT_DIR$/MentorMateTest.iml" filepath="$PROJECT_DIR$/MentorMateTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

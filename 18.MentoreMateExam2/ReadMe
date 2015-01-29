@@ -1,0 +1,32 @@
+Use of Fragments in the application:
+- I used combined Navigation Drawer and Master Detail, they use fragments by default
+
+Use of Navigation (Drawer or Tabs):
+- Navigation Drawer
+
+Support for tablets:
+- Master Detail
+
+Use of Notifications (e.g. when data has been downloaded):
+- I used Notification when creating a new Movie, you can find the method "notifyTheUser(Movie movie)" at NewMovieFragment.java
+
+Download data from the Web:
+- The ImportFromInternetTask.java task does the job of downloading from the internet
+ 
+OR Use local JSON file:
+- The ImportFromJsonTask.java task does the job of downloading from movies.json file
+
+Dynamically generate the query for the json file:
+- Look at the ImportFromJsonTask -> getMoviesFromJSON() method. There's a filtration going on :P
+
+Local database - Save and read the data for the list from the database:
+- Using SQLite as a Local Database, you can find it at the package com.tlnguyen.movieapp.data
+
+Use of SharedPreferences
+- The Navigation Drawer automatically use the sharedPreference to read in the flag indicating whether or not the user has demonstrated awareness of the drawer. You can see it at NavigationDrawerFragment.java file
+
+Export database to an external file
+- The ExportToFileTask.java task does the job for exporting everything from the Db to MOVIES_EXPORTED.txt file in the external storage. You can see the example of this file that I've put in this directory
+
+Finished apps with style
+- I've put just a litle bit of styles at styles.xml, NormalElement is the style in phone mode, BigElement is the style in the tablet mode

@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@android:id/list"
+        android:name="com.tlnguyen.movieapp.fragments.MovieListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        tools:context="com.tlnguyen.movieapp.activities.MainActivity"
+        tools:layout="@android:layout/list_content" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/json_import_query"
+        android:id="@+id/etQuery"/>
+
+    <Button
+        android:text="@string/import_from_json"
+        android:id="@+id/btnImportJSON"
+        style="@style/NormalElement"/>
+
+    <Button
+        android:text="@string/import_from_net"
+        android:id="@+id/btnImportInternet"
+        style="@style/NormalElement"/>
+
+    <Button
+        android:text="@string/export_btn"
+        android:id="@+id/btnExport"
+        style="@style/NormalElement"/>
+
+</LinearLayout>
+                                                                                                                                                                                                                                            
+

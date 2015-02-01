@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.tlnguyen.weatherspot.R;
 import com.tlnguyen.weatherspot.models.Spot;
 
@@ -86,9 +87,9 @@ public class SpotListFragment extends ListFragment {
      */
     public SpotListFragment() {
         mSpots = new ArrayList<>();
-        mSpots.add(new Spot(123f, 123f, "test", "", new Date()));
-        mSpots.add(new Spot(123f, 123f, "test", "", new Date()));
-        mSpots.add(new Spot(123f, 123f, "test", "", new Date()));
+        mSpots.add(new Spot(new LatLng(12f, 123f), "test", "", new Date()));
+        mSpots.add(new Spot(new LatLng(22f, 122f), "test", "", new Date()));
+        mSpots.add(new Spot(new LatLng(22f, 122f), "test", "", new Date()));
 
     }
 

@@ -3,6 +3,8 @@ package com.tlnguyen.weatherspot.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Date;
 
 /**
@@ -10,8 +12,7 @@ import java.util.Date;
  */
 public class Spot implements Parcelable {
     private int id;
-    private double latitude;
-    private double longitude;
+    private LatLng location;
     private String weather;
     private String photoPath;
     private Date createdAt;
@@ -19,9 +20,8 @@ public class Spot implements Parcelable {
     public Spot() {
     }
 
-    public Spot(double latitude, double longitude, String weather, String photoPath, Date createdAt) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Spot(LatLng location, String weather, String photoPath, Date createdAt) {
+        this.location = location;
         this.weather = weather;
         this.photoPath = photoPath;
         this.createdAt = createdAt;
@@ -35,20 +35,12 @@ public class Spot implements Parcelable {
         this.id = id;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public LatLng getLocation() {
+        return location;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLocation(LatLng location) {
+        this.location = location;
     }
 
     public String getWeather() {
@@ -83,8 +75,7 @@ public class Spot implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
-        dest.writeDouble(this.latitude);
-        dest.writeDouble(this.longitude);
+        dest.writeParcelable(this.location, flags);
         dest.writeString(this.weather);
         dest.writeString(this.photoPath);
         dest.writeLong(createdAt != null ? createdAt.getTime() : -1);
@@ -92,15 +83,14 @@ public class Spot implements Parcelable {
 
     private Spot(Parcel in) {
         this.id = in.readInt();
-        this.latitude = in.readDouble();
-        this.longitude = in.readDouble();
+        this.location = in.readParcelable(LatLng.class.getClassLoader());
         this.weather = in.readString();
         this.photoPath = in.readString();
         long tmpCreatedAt = in.readLong();
         this.createdAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
     }
 
-    public static final Parcelable.Creator<Spot> CREATOR = new Parcelable.Creator<Spot>() {
+    public static final Creator<Spot> CREATOR = new Creator<Spot>() {
         public Spot createFromParcel(Parcel source) {
             return new Spot(source);
         }

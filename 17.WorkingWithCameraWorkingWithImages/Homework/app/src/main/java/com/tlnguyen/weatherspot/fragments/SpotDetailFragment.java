@@ -54,7 +54,8 @@ public class SpotDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mSpot != null) {
-            ((TextView) rootView.findViewById(R.id.spot_detail)).setText(mSpot.getLatitude() + "/" + mSpot.getLongitude());
+            ((TextView) rootView.findViewById(R.id.spot_detail))
+                    .setText(mSpot.getLocation().latitude + "/" + mSpot.getLocation().longitude);
         }
 
         return rootView;

@@ -2,12 +2,11 @@
 <resources>
 
     <string name="app_name">WeatherSpot</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="title_section1">Spot Weather</string>
+    <string name="title_section2">Spots History</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main">Weather Spot</string>
+    <string name="title_spot_list">Spots</string>
+    <string name="title_spot_detail">Spot Detail</string>
 
 </resources>

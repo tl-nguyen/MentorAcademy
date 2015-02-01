@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tlnguyen.handlinglocation.activities.AsyncLocationActivity">
+
+    <item
+        android:id="@+id/action_start_tracking"
+        android:orderInCategory="100"
+        android:title="Start tracking"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_stop_tracking"
+        android:orderInCategory="100"
+        android:title="Stop tracking"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_start_tracking_service"
+        android:orderInCategory="100"
+        android:title="Start tracking service"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_stop_tracking_service"
+        android:orderInCategory="100"
+        android:title="Stop tracking service"
+        app:showAsAction="never"/>
+</menu>

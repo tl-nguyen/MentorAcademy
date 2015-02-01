@@ -1,0 +1,68 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_accurate_location_providers"
+        android:orderInCategory="100"
+        android:title="Accurate Location Providers"
+        app:showAsAction="never"
+        android:onClick="onAccurateProvider"/>
+
+    <item
+        android:id="@+id/action_low_power_location_providers"
+        android:orderInCategory="100"
+        android:title="LowPower Location Providers"
+        app:showAsAction="never"
+        android:onClick="onLowePowerProvider"/>
+
+    <item
+        android:id="@+id/action_start"
+        android:orderInCategory="100"
+        android:title="Start Network Listener"
+        app:showAsAction="never"
+        android:onClick="onStartNetworkListener"/>
+
+    <item
+        android:id="@+id/action_passive_start"
+        android:orderInCategory="100"
+        android:title="Start Passive Listener"
+        app:showAsAction="never"
+        android:onClick="onStartPassiveListener"/>
+
+    <item
+        android:id="@+id/action_stop"
+        android:orderInCategory="100"
+        android:title="Stop Network Listener"
+        app:showAsAction="never"
+        android:onClick="onStopNetworkListener"/>
+
+    <item
+        android:id="@+id/action_recent_location"
+        android:orderInCategory="100"
+        android:title="onRecentLocation"
+        app:showAsAction="never"
+        android:onClick="onRecentLocation"/>
+
+    <item
+        android:id="@+id/action_single_location"
+        android:orderInCategory="100"
+        android:title="onSingleLocation"
+        app:showAsAction="never"
+        android:onClick="onSingleLocation"/>
+
+    <item
+        android:id="@+id/action_async_activity"
+        android:orderInCategory="100"
+        android:title="Go to AsyncActivity"
+        app:showAsAction="never"
+        android:onClick="onToAsyncActivity"/>
+
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:title="onExit"
+        app:showAsAction="never"
+        android:onClick="onExit"/>
+</menu>

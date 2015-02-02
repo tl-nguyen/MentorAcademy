@@ -58,6 +58,7 @@ public class WeatherHelper {
 
     private String getJson(Location location) {
         String resultString = "";
+        InputStream inputStream = null;
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/station/find?lat="
@@ -71,7 +72,7 @@ public class WeatherHelper {
             HttpResponse response = httpclient.execute(httpGet);
             HttpEntity entity = response.getEntity();
 
-            InputStream inputStream = entity.getContent();
+            inputStream = entity.getContent();
             InputStreamReader byteReader = new InputStreamReader(inputStream, "UTF-8");
             BufferedReader reader = new BufferedReader(byteReader, 8);
             StringBuilder sb = new StringBuilder();
@@ -79,17 +80,21 @@ public class WeatherHelper {
             String line = null;
             while ((line = reader.readLine()) != null)
             {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
             resultString = sb.toString();
-
-            if(inputStream != null) {
-                inputStream.close();
-            }
-
         } catch (IOException e) {
             return e.toString();
+        } finally {
+            if(inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
 
         return resultString;
     }

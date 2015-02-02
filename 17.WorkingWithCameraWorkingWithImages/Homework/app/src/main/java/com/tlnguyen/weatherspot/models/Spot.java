@@ -27,6 +27,11 @@ public class Spot implements Parcelable {
         this.createdAt = createdAt;
     }
 
+    public Spot(int id, LatLng location, String weather, String photoPath, Date createdAt) {
+        this(location, weather, photoPath, createdAt);
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

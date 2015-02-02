@@ -119,22 +119,4 @@ public class NewMovieFragment extends Fragment implements View.OnClickListener {
         mEtName.setFocusableInTouchMode(true);
         mEtName.requestFocus();
     }
-
-    // Notification
-    public void notifyTheUser(Movie movie) {
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getActivity())
-                .setContentTitle(movie.getId() + " : " + movie.getName())
-                .setContentText(movie.getDescription())
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setAutoCancel(true);
-
-        Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
-        intent.putExtra(MOVIE, movie);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        notificationBuilder.setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Activity.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(1, notificationBuilder.build());
-    }
 }

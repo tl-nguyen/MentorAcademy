@@ -5,7 +5,7 @@ import android.net.Uri;
 public interface Constants {
 
     // Constants for the content provider
-    public static final String AUTHORITY = "com.tlnguyen.weatherspot.data.MovieProvider";
+    public static final String AUTHORITY = "com.tlnguyen.weatherspot.data.SpotProvider";
     public static final String DATABASE_NAME = "WeatherSpot.db";
     public static final String SPOT_TABLE = "Spots";
     public static final String URL = "content://" + AUTHORITY + "/" + SPOT_TABLE;

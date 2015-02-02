@@ -7,13 +7,13 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String CREATE_TABLE = "CREATE TABLE " + Constants.SPOT_TABLE +
             " (" + Constants.COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
             Constants.COL_LATITUDE + " TEXT NOT NULL, " +
             Constants.COL_LONGITUDE + " TEXT NOT NULL, " +
             Constants.COL_CREATED_AT + " DATE NOT NULL, " +
-            Constants.COL_PHOTO_PATH + " TEXT NOT NULL, " +
+            Constants.COL_PHOTO_PATH + " TEXT, " +
             Constants.COL_WEATHER +" TEXT NOT NULL);";
 
     public DBHelper(Context context) {

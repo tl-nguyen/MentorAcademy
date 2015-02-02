@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,7 +25,7 @@ public class LocationHelper {
         mContext = context;
     }
 
-    public String getAddress(Location location) {
+    public String getAddress(double latitude, double longitude) {
         Geocoder geocoder;
         List<Address> addresses;
         String result = null;
@@ -34,13 +33,15 @@ public class LocationHelper {
         geocoder = new Geocoder(mContext, Locale.getDefault());
 
         try {
-            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
             String address = addresses.get(0).getAddressLine(0);
             String city = addresses.get(0).getAddressLine(1);
             String country = addresses.get(0).getAddressLine(2);
 
-            result = address + " | " + city + " | " + country;
+            result = (address != null ? address + " | " : "")
+                    + (city != null ? city : "")
+                    + (country != null ? " | " + country : "");
         } catch (IOException e) {
             e.printStackTrace();
         }

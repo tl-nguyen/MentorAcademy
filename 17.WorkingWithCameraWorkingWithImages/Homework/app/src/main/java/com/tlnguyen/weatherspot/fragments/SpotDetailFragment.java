@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.tlnguyen.weatherspot.R;
 import com.tlnguyen.weatherspot.models.Spot;
+import com.tlnguyen.weatherspot.tools.LocationHelper;
 
 /**
  * A fragment representing a single Spot detail screen.
@@ -52,10 +53,19 @@ public class SpotDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_spot_detail, container, false);
 
+        TextView tvLocation = (TextView) rootView.findViewById(R.id.tvLocation);
+        TextView tvWeather = (TextView) rootView.findViewById(R.id.tvWeather);
+
         // Show the dummy content as text in a TextView.
         if (mSpot != null) {
-            ((TextView) rootView.findViewById(R.id.spot_detail))
-                    .setText(mSpot.getLocation().latitude + "/" + mSpot.getLocation().longitude);
+
+            String address = new LocationHelper(getActivity())
+                    .getAddress(
+                            mSpot.getLocation().latitude,
+                            mSpot.getLocation().longitude);
+
+            tvLocation.setText(address);
+            tvWeather.setText(mSpot.getWeather());
         }
 
         return rootView;

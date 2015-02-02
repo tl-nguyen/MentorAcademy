@@ -7,12 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.tlnguyen.weatherspot.R;
 import com.tlnguyen.weatherspot.models.Spot;
+import com.tlnguyen.weatherspot.tasks.FetchFromDbTask;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,7 +30,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class SpotListFragment extends ListFragment {
+public class SpotListFragment extends ListFragment implements View.OnClickListener {
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -79,7 +80,10 @@ public class SpotListFragment extends ListFragment {
     }
 
     private List<Spot> mSpots;
+    private ArrayAdapter<Spot> mSpotsAdapter;
     private boolean mTwoPane;
+
+    private Button mBtnRefresh;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -87,17 +91,13 @@ public class SpotListFragment extends ListFragment {
      */
     public SpotListFragment() {
         mSpots = new ArrayList<>();
-        mSpots.add(new Spot(new LatLng(12f, 123f), "test", "", new Date()));
-        mSpots.add(new Spot(new LatLng(22f, 122f), "test", "", new Date()));
-        mSpots.add(new Spot(new LatLng(22f, 122f), "test", "", new Date()));
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setListAdapter(new ArrayAdapter<Spot>(
+        mSpotsAdapter = new ArrayAdapter<Spot>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
@@ -116,7 +116,9 @@ public class SpotListFragment extends ListFragment {
 
                 return view;
             }
-        });
+        };
+
+        setListAdapter(mSpotsAdapter);
     }
 
     @Override
@@ -124,6 +126,9 @@ public class SpotListFragment extends ListFragment {
         View rootView = inflater.inflate(R.layout.fragment_spot_list, container, false);
 
         mTwoPane = rootView.findViewById(R.id.spot_detail_container) != null;
+        mBtnRefresh = (Button) rootView.findViewById(R.id.btnRefresh);
+
+        mBtnRefresh.setOnClickListener(this);
 
         return rootView;
     }
@@ -145,6 +150,12 @@ public class SpotListFragment extends ListFragment {
         if (mTwoPane) {
             this.setActivateOnItemClick(true);
         }
+
+        fetchData();
+    }
+
+    private void fetchData() {
+        new FetchFromDbTask(getActivity(), mSpots, mSpotsAdapter).execute();
     }
 
     @Override
@@ -182,6 +193,16 @@ public class SpotListFragment extends ListFragment {
         if (mActivatedPosition != ListView.INVALID_POSITION) {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.btnRefresh:
+                fetchData();
+                break;
         }
     }
 

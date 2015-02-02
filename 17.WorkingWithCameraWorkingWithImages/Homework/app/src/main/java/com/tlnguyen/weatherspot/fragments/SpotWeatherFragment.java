@@ -1,6 +1,11 @@
 package com.tlnguyen.weatherspot.fragments;
 
+import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -8,6 +13,7 @@ import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +21,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.tlnguyen.weatherspot.R;
+import com.tlnguyen.weatherspot.activities.SpotDetailActivity;
+import com.tlnguyen.weatherspot.data.Constants;
+import com.tlnguyen.weatherspot.models.Spot;
 import com.tlnguyen.weatherspot.tools.LocationHelper;
+import com.tlnguyen.weatherspot.tools.WeatherHelper;
+
+import java.util.Date;
 
 /**
  * Created by tl on 01.02.15.
@@ -24,6 +37,7 @@ import com.tlnguyen.weatherspot.tools.LocationHelper;
 public class SpotWeatherFragment extends Fragment implements View.OnClickListener, LocationListener{
 
     private static final String LOG_TAG = "WeatherSpot";
+    private static final String SPOT = "SPOT";
 
     /**
      * The fragment argument representing the section number for this
@@ -49,8 +63,10 @@ public class SpotWeatherFragment extends Fragment implements View.OnClickListene
 
     private Looper mLooper;
     private Location mCurrentLocation;
+    private String mCurrentSpotWeather;
 
     LocationHelper mLocationHelper;
+    WeatherHelper mWeatherHelper;
 
     public SpotWeatherFragment() {
 
@@ -63,6 +79,7 @@ public class SpotWeatherFragment extends Fragment implements View.OnClickListene
         setRetainInstance(true);
 
         mLocationHelper = new LocationHelper(getActivity());
+        mWeatherHelper = new WeatherHelper();
     }
 
     @Override
@@ -89,30 +106,69 @@ public class SpotWeatherFragment extends Fragment implements View.OnClickListene
 
         switch (id) {
             case R.id.btnQuery:
-                getCoordinate();
+                getCoordinateUpdate();
                 break;
         }
     }
 
     @Override
     public void onLocationChanged(final Location location) {
+        Log.d(LOG_TAG, "onLocationChanged");
 
         mCurrentLocation = location;
+        mCurrentSpotWeather = mWeatherHelper.getWeather(location);
 
-        Log.d(LOG_TAG, "onLocationChanged");
+        final Spot newSpot = new Spot(new LatLng(location.getLatitude(),
+                location.getLongitude()),
+                mCurrentSpotWeather,
+                null,
+                new Date());
+
+        saveToDb(newSpot);
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                setLocation();
+                setUI();
+                notifyTheUser(newSpot);
             }
         });
     }
 
-    private void setLocation() {
+    private void saveToDb(Spot newSpot) {
+        ContentValues values = new ContentValues();
+        values.put(Constants.COL_LATITUDE, newSpot.getLocation().latitude);
+        values.put(Constants.COL_LONGITUDE, newSpot.getLocation().longitude);
+        values.put(Constants.COL_CREATED_AT, newSpot.getCreatedAt().toString());
+        values.put(Constants.COL_PHOTO_PATH, newSpot.getPhotoPath());
+        values.put(Constants.COL_WEATHER, newSpot.getWeather());
+
+        getActivity().getContentResolver().insert(Constants.CONTENT_URI, values);
+    }
+
+    private void setUI() {
         if (mCurrentLocation != null) {
-            mTvLocation.setText(mLocationHelper.getAddress(mCurrentLocation));
+            mTvLocation.setText(mLocationHelper.getAddress(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()));
+            mTvWeather.setText(mCurrentSpotWeather);
         }
+    }
+
+    // Notification
+    public void notifyTheUser(Spot spot) {
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getActivity())
+                .setContentTitle(spot.getId() + " : " + spot.getLocation())
+                .setContentText(spot.getWeather())
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setAutoCancel(true);
+
+        Intent intent = new Intent(getActivity(), SpotDetailActivity.class);
+        intent.putExtra(SPOT, spot);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        notificationBuilder.setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Activity.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(1, notificationBuilder.build());
     }
 
     @Override
@@ -133,7 +189,7 @@ public class SpotWeatherFragment extends Fragment implements View.OnClickListene
 
     }
 
-    public void getCoordinate() {
+    public void getCoordinateUpdate() {
         LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         // Make a separate thread to run and then get the looper of the thread

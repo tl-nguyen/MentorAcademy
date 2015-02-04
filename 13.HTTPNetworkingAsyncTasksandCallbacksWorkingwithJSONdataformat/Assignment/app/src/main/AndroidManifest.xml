@@ -29,8 +29,14 @@
         </activity>
 
         <provider
-            android:authorities="com.tlnguyen.assignment.data.WeatherProvider"
-            android:name=".data.WeatherProvider" />
+            android:name=".data.WeatherProvider"
+            android:authorities="com.tlnguyen.assignment.data.WeatherProvider" />
+
+        <service
+            android:name=".services.UpdaterService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

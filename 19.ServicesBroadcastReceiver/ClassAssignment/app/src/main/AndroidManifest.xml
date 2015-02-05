@@ -27,12 +27,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tlnguyen.classassignment.activities.MainActivity" />
-
-            <intent-filter>
-                <action android:name="com.tlnguyen.classassignment.services.action.UPDATE_WEATHER" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <service

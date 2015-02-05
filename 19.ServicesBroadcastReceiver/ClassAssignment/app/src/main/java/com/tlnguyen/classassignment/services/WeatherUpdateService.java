@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class WeatherUpdateService extends IntentService {
 
-    public static final String UPDATE_WEATHER = "com.tlnguyen.classassignment.services.action.UPDATE_WEATHER";
     public static final String BROADCAST_RESULT = "com.tlnguyen.classassignment.services.action.BROADCAST_RESULT";
 
     private ArrayList<Day> mDays;

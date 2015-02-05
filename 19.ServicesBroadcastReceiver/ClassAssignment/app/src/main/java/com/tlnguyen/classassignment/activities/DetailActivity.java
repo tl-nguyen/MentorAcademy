@@ -1,4 +1,4 @@
-package com.tlnguyen.assignment.activities;
+package com.tlnguyen.classassignment.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -6,9 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.tlnguyen.assignment.R;
-import com.tlnguyen.assignment.models.Day;
-
+import com.tlnguyen.classassignment.R;
+import com.tlnguyen.classassignment.models.Day;
 
 public class DetailActivity extends ActionBarActivity {
 

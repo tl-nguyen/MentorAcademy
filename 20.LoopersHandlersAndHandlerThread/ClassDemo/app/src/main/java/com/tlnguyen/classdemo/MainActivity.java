@@ -13,9 +13,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        CustomAsyncTask customAsyncTask = new CustomAsyncTask(this);
-//
-//        customAsyncTask.execute("http://google.com");
+        CustomAsyncTask customAsyncTask = new CustomAsyncTask(this);
+
+        customAsyncTask.execute("http://google.com");
 
 
         CustomHandlerThread customHandlerThread = new CustomHandlerThread("CustomHandlerThread");

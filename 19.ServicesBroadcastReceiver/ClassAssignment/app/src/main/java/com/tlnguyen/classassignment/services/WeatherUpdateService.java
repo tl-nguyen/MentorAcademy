@@ -25,7 +25,9 @@ import java.util.ArrayList;
 
 public class WeatherUpdateService extends IntentService {
 
-    public static final String BROADCAST_RESULT = "com.tlnguyen.classassignment.services.action.BROADCAST_RESULT";
+    public static final String BROADCAST_RESULT = "com.tlnguyen.classassignment.action.BROADCAST_RESULT";
+
+    public static final String API_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=42.69751&lon=23.32415&cnt=10&mode=json";
 
     private ArrayList<Day> mDays;
 
@@ -38,37 +40,42 @@ public class WeatherUpdateService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Log.i(WeatherUpdateService.class.getSimpleName(), "Updating...");
 
-        String resultString = "";
+        String resultString;
+        InputStream inputStream = null;
+
         mDays.clear();
 
         try {
-            URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?lat=42.69751&lon=23.32415&cnt=10&mode=json");
+            URL url = new URL(API_URL);
 
             HttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
             HttpGet httpGet = new HttpGet(String.valueOf(url));
             HttpResponse response = httpclient.execute(httpGet);
             HttpEntity entity = response.getEntity();
 
-            InputStream inputStream = entity.getContent();
+            inputStream = entity.getContent();
             InputStreamReader byteReader = new InputStreamReader(inputStream, "UTF-8");
             BufferedReader reader = new BufferedReader(byteReader, 8);
             StringBuilder sb = new StringBuilder();
 
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null)
             {
                 sb.append(line).append("\n");
             }
             resultString = sb.toString();
 
-            if(inputStream != null) {
-                inputStream.close();
-            }
-
             mDays.addAll(handleJSON(resultString));
-
         } catch (IOException e) {
             Log.e(WeatherUpdateService.class.getSimpleName(), e.toString());
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         Log.i(WeatherUpdateService.class.getSimpleName(), "Done");
@@ -77,7 +84,6 @@ public class WeatherUpdateService extends IntentService {
         broadcastIntent.putParcelableArrayListExtra("RESULT", mDays);
 
         sendBroadcast(broadcastIntent);
-
     }
 
     private ArrayList<Day> handleJSON(String resultString) {

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.tlnguyen.classassignment.models.Day;
+import com.tlnguyen.classassignment.services.WeatherUpdateService;
 
 import java.util.ArrayList;
 
@@ -14,9 +15,6 @@ public class WeatherReceiver extends BroadcastReceiver {
 
     ArrayAdapter<Day> mAdapter;
     ArrayList<Day> mDays;
-
-    public WeatherReceiver() {
-    }
 
     public WeatherReceiver(ArrayAdapter<Day> adapter, ArrayList<Day> days) {
         this.mAdapter = adapter;
@@ -27,7 +25,7 @@ public class WeatherReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
 
-        if (action.equalsIgnoreCase("com.tlnguyen.classassignment.services.action.BROADCAST_RESULT")) {
+        if (action.equalsIgnoreCase(WeatherUpdateService.BROADCAST_RESULT)) {
             updateUI(intent);
         }
     }

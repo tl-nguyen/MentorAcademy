@@ -1,7 +1,6 @@
 package com.tlnguyen.classdemo;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
@@ -24,7 +23,6 @@ public class MainActivity extends ActionBarActivity {
         customHandlerThread.prepareHandler();
 
         Runnable runnable = new Runnable() {
-            private Handler handler = new Handler();
 
             @Override
             public void run() {
